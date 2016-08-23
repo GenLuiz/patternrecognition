@@ -19,9 +19,9 @@ def loadDataset(filename, datasetResult):
 def euclideanDistance(instance1, instance2, length):
     distance = 0
     for x in range(length):
-        distance += pow((instance1[x]) - (instance2[x]), 2)
-    return math.sqrt(distance)
-
+        distance += ((instance1[x] * instance1[x]) + (instance2[x]*instance2[x]))
+    //return math.sqrt(distance)
+    return distance
 
 def getNeighbors(trainingSet, testInstance, k):
     distances = []
@@ -34,6 +34,27 @@ def getNeighbors(trainingSet, testInstance, k):
     for x in range(k):
         neighbors.append(distances[x][0])
     return neighbors
+    
+    
+def getNeighborsv2(trainingSet, testInstance, k):
+    distances = []
+    length = len(testInstance) - 1
+    closest = 9999;
+    for x in range(len(trainingSet)):
+        dist = euclideanDistance(testInstance, trainingSet[x], length)
+        if dist <= closest:
+            distances.insert(0, (trainingSet[x], dist))
+            closest = dist
+        else
+            distances.append((trainingSet[x], dist))
+            
+    """distances.sort(key=operator.itemgetter(1))"""
+   
+    closeset_neighbors = []
+    for x in range(k):
+        closeset_neighbors.append(distances[x][0])
+    return closeset_neighbors    
+    
 
 def getResponse(neighbors):
     classVotes = {}
