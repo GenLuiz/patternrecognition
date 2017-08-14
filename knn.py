@@ -4,6 +4,7 @@ import random
 import math
 import operator
 
+#algorithm knn(k nearest neighbor)
 def loadDataset(filename, datasetResult):
     with open(filename, 'rb') as tsv:
         row, column = map(int, tsv.readline().split(" "));
